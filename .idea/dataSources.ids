@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - mydb@localhost" uuid="e648f98c-d26a-4a96-a4e4-b297a1c7d2b6">
+    <database-info product="MySQL" version="5.6.21-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="mydb"/>
+    <table name="action" schema="" catalog="mydb" type="TABLE">
+      <column name="idAction" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Data" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="placeItteract" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="conscriptCard_idconscriptCardId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idAction"/>
+      <foreign-key name="fk_Action_conscriptCard1" columns="conscriptCard_idconscriptCardId" ref-table="conscriptcard" ref-schema="" ref-catalog="mydb" ref-columns="idconscriptCardId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Specialist_Action1" table="specialist" schema="" catalog="mydb" columns="Action_idAction"/>
+      <index name="fk_Action_conscriptCard1_idx" unique="false" columns="conscriptCard_idconscriptCardId"/>
+    </table>
+    <table name="addition" schema="" catalog="mydb" type="TABLE">
+      <column name="additionID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Decision_idDecision" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="additionID"/>
+      <foreign-key name="fk_addition_Decision1" columns="Decision_idDecision" ref-table="decision" ref-schema="" ref-catalog="mydb" ref-columns="idDecision" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_InnerDocument_addition1" table="innerdocument" schema="" catalog="mydb" columns="addition_additionID"/>
+      <index name="fk_addition_Decision1_idx" unique="false" columns="Decision_idDecision"/>
+    </table>
+    <table name="conscriptcard" schema="" catalog="mydb" type="TABLE">
+      <column name="idconscriptCardId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="surname" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fathersName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phoneNumber" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="passportData" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idconscriptCardId"/>
+      <exported-key name="fk_Action_conscriptCard1" table="action" schema="" catalog="mydb" columns="conscriptCard_idconscriptCardId"/>
+      <exported-key name="fk_Decision_conscriptCard1" table="decision" schema="" catalog="mydb" columns="conscriptCard_idconscriptCardId"/>
+      <exported-key name="fk_Document_conscriptCard" table="document" schema="" catalog="mydb" columns="conscriptCard_idconscriptCardId"/>
+      <exported-key name="fk_medicalUnit_conscriptCard1" table="medicalunit" schema="" catalog="mydb" columns="conscriptCard_idconscriptCardId"/>
+    </table>
+    <table name="corps" schema="" catalog="mydb" type="TABLE">
+      <column name="corpsID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NumberOfOutfit" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Decision_idDecision" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="corpsID"/>
+      <foreign-key name="fk_corps_Decision1" columns="Decision_idDecision" ref-table="decision" ref-schema="" ref-catalog="mydb" ref-columns="idDecision" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_corps_Decision1_idx" unique="false" columns="Decision_idDecision"/>
+    </table>
+    <table name="decision" schema="" catalog="mydb" type="TABLE">
+      <column name="idDecision" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Comment" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="conscriptCard_idconscriptCardId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idDecision"/>
+      <foreign-key name="fk_Decision_conscriptCard1" columns="conscriptCard_idconscriptCardId" ref-table="conscriptcard" ref-schema="" ref-catalog="mydb" ref-columns="idconscriptCardId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_addition_Decision1" table="addition" schema="" catalog="mydb" columns="Decision_idDecision"/>
+      <exported-key name="fk_corps_Decision1" table="corps" schema="" catalog="mydb" columns="Decision_idDecision"/>
+      <exported-key name="fk_Specialist_Decision1" table="specialist" schema="" catalog="mydb" columns="Decision_idDecision"/>
+      <index name="fk_Decision_conscriptCard1_idx" unique="false" columns="conscriptCard_idconscriptCardId"/>
+    </table>
+    <table name="document" schema="" catalog="mydb" type="TABLE">
+      <column name="DocumentID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="URL" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="conscriptCard_idconscriptCardId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="DocumentID"/>
+      <foreign-key name="fk_Document_conscriptCard" columns="conscriptCard_idconscriptCardId" ref-table="conscriptcard" ref-schema="" ref-catalog="mydb" ref-columns="idconscriptCardId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Document_conscriptCard_idx" unique="false" columns="conscriptCard_idconscriptCardId"/>
+    </table>
+    <table name="innerdocument" schema="" catalog="mydb" type="TABLE">
+      <column name="idInnerDocument" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="url" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="addition_additionID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idInnerDocument"/>
+      <foreign-key name="fk_InnerDocument_addition1" columns="addition_additionID" ref-table="addition" ref-schema="" ref-catalog="mydb" ref-columns="additionID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_InnerDocument_addition1_idx" unique="false" columns="addition_additionID"/>
+    </table>
+    <table name="medicalspecialist" schema="" catalog="mydb" type="TABLE">
+      <column name="idMedicalSpecialist" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="surname" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fathersName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idMedicalSpecialist"/>
+      <exported-key name="fk_medicalUnit_MedicalSpecialist1" table="medicalunit" schema="" catalog="mydb" columns="MedicalSpecialist_idMedicalSpecialist"/>
+    </table>
+    <table name="medicalunit" schema="" catalog="mydb" type="TABLE">
+      <column name="idmedicalUnit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="comment" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="conscriptCard_idconscriptCardId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="MedicalSpecialist_idMedicalSpecialist" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idmedicalUnit"/>
+      <foreign-key name="fk_medicalUnit_MedicalSpecialist1" columns="MedicalSpecialist_idMedicalSpecialist" ref-table="medicalspecialist" ref-schema="" ref-catalog="mydb" ref-columns="idMedicalSpecialist" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_medicalUnit_conscriptCard1" columns="conscriptCard_idconscriptCardId" ref-table="conscriptcard" ref-schema="" ref-catalog="mydb" ref-columns="idconscriptCardId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_medicalUnit_conscriptCard1_idx" unique="false" columns="conscriptCard_idconscriptCardId"/>
+      <index name="fk_medicalUnit_MedicalSpecialist1_idx" unique="false" columns="MedicalSpecialist_idMedicalSpecialist"/>
+    </table>
+    <table name="specialist" schema="" catalog="mydb" type="TABLE">
+      <column name="idSpecialist" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Surname" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FathersName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="rank" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Decision_idDecision" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Action_idAction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idSpecialist"/>
+      <foreign-key name="fk_Specialist_Action1" columns="Action_idAction" ref-table="action" ref-schema="" ref-catalog="mydb" ref-columns="idAction" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Specialist_Decision1" columns="Decision_idDecision" ref-table="decision" ref-schema="" ref-catalog="mydb" ref-columns="idDecision" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Specialist_Action1_idx" unique="false" columns="Action_idAction"/>
+      <index name="fk_Specialist_Decision1_idx" unique="false" columns="Decision_idDecision"/>
+    </table>
+  </data-source>
+</component>
